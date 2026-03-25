@@ -1,7 +1,7 @@
 # Git + Azure DevOps PAT Workflow
 
 ## 1️⃣ Create a Personal Access Token (PAT)
-1. Sign in to Azure DevOps as **EXT_Yash.Sharma@vistra.com**.
+1. Sign in to Azure DevOps as **EXT_Yash.Sharma@code.com**.
 2. Click your avatar → **User Settings → Personal access tokens** → **+ New Token**.
 3. **Scope**: `Code → Read & Write` (add other scopes if needed).
 4. **Expiration**: choose a period (e.g., 30 days).
@@ -20,7 +20,7 @@ The first time you authenticate, the PAT will be saved securely in the Windows C
 git clone https://dev.azure.com/landingzone/Project%20Horizon/_git/code-infra
 ```
 When prompted:
-- **Username**: `EXT_Yash.Sharma@vistra.com`
+- **Username**: `EXT_Yash.Sharma@code.com`
 - **Password**: *paste the PAT*
 
 ### 3‑b One‑liner (useful for scripts)
@@ -33,7 +33,7 @@ Replace `<YOUR_PAT>` with the token you generated.
 
 ## 4️⃣ Pull latest changes
 ```powershell
-cd vistra-infra
+cd code-infra
 git pull
 ```
 If the credential manager has the PAT, this works silently.

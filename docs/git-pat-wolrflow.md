@@ -17,7 +17,7 @@ The first time you authenticate, the PAT will be saved securely in the Windows C
 ## 3️⃣ Clone a repository (HTTPS)
 ### 3‑a Interactive (recommended for first use)
 ```powershell
-git clone https://dev.azure.com/vistralandingzone/Project%20Horizon/_git/vistra-infra
+git clone https://dev.azure.com/landingzone/Project%20Horizon/_git/code-infra
 ```
 When prompted:
 - **Username**: `EXT_Yash.Sharma@vistra.com`
@@ -27,7 +27,7 @@ When prompted:
 ```powershell
 $pat = "<YOUR_PAT>"
 $enc = [System.Web.HttpUtility]::UrlEncode($pat)
-git clone "https://$enc@dev.azure.com/vistralandingzone/Project%20Horizon/_git/vistra-infra"
+git clone "https://$enc@dev.azure.com/landingzone/Project%20Horizon/_git/code-infra"
 ```
 Replace `<YOUR_PAT>` with the token you generated.
 
@@ -57,8 +57,8 @@ Then run any Git command; you’ll be prompted for the PAT again.
 ## 7️⃣ Quick cheat‑sheet
 | Action | Command | Notes |
 |--------|---------|-------|
-| Clone (interactive) | `git clone https://dev.azure.com/vistralandingzone/Project%20Horizon/_git/vistra-infra` | Username = email, Password = PAT |
-| Clone (script) | `$pat="<PAT>"; $enc=[System.Web.HttpUtility]::UrlEncode($pat); git clone "https://$enc@dev.azure.com/vistralandingzone/Project%20Horizon/_git/vistra-infra"` | No credential manager needed |
+| Clone (interactive) | `git clone https://dev.azure.com/landingzone/Project%20Horizon/_git/code-infra` | Username = email, Password = PAT |
+| Clone (script) | `$pat="<PAT>"; $enc=[System.Web.HttpUtility]::UrlEncode($pat); git clone "https://$enc@dev.azure.com/landingzone/Project%20Horizon/_git/code-infra"` | No credential manager needed |
 | Pull | `git pull` | Run inside repo |
 | Push | `git push origin <branch>` | Replace `<branch>` |
 | Erase stored PAT | `git credential-manager-core erase` | Forces re‑prompt |

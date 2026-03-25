@@ -33,18 +33,21 @@ With this setup:
 
 ## 2. Directory-Based Git Configurations
 
-To automatically use the correct Git name and email depending on which folder you're in, we use Git's `includeIf` directive in the global `~/.gitconfig`.
+To automatically use the correct Git name and email depending on which folder you're in, we use Git's `includeIf` directive in the global `~/.gitconfig`. We set up two specific folders: `Desktop/Personal/` and `Desktop/Work/`.
 
-### Global `.gitconfig`
-In your `~/.gitconfig`, standard values are used. But for any repository under a specific directory (like your Personal folder), an override file is loaded:
+### Step 1: Update Global `.gitconfig`
+In your global `~/.gitconfig` file, add the directory mappings pointing to respective override files. This tells Git to use different settings based on your current path:
 
 ```ini
 [includeIf "gitdir:C:/Users/Nuaav01/Desktop/Personal/"]
     path = ~/.gitconfig-personal
+
+[includeIf "gitdir:C:/Users/Nuaav01/Desktop/Work/"]
+    path = ~/.gitconfig-work
 ```
 
-### Personal Override `.gitconfig-personal`
-This override file sets your personal commit overrides:
+### Step 2: Create Personal Override (`~/.gitconfig-personal`)
+Create this file to define your personal identity. Any repository inside the `Desktop/Personal/` directory will strictly use this:
 
 ```ini
 [user]
@@ -52,12 +55,26 @@ This override file sets your personal commit overrides:
     email = personal@example.com
 ```
 
+### Step 3: Create Work Override (`~/.gitconfig-work`)
+Create this file to define your official work identity. Any repository inside the `Desktop/Work/` directory will strictly use this:
+
+```ini
+[user]
+    name = Your Work Name
+    email = work@code.com
+```
+
 ### How it works:
-Whenever you initialize or clone a repository inside `C:/Users/Nuaav01/Desktop/Personal/`, Git automatically evaluates the `includeIf` directive and applies the settings from `~/.gitconfig-personal`. This completely prevents accidental commits using your work email on personal repositories!
+Whenever you run a git command, Git automatically checks your current path. If you are inside `Desktop/Work/`, it applies the `~/.gitconfig-work` settings. If you are in `Desktop/Personal/`, it applies your personal settings. **This entirely prevents accidental commits using your work email on personal repositories!**
 
 ## 3. Workflow Example
 
-1. Ensure your repository is inside the defined directory (e.g., `Desktop/Personal/`).
-2. Initialize or clone using your preferred SSH hostname:
-   `git remote add origin git@github.com:yourusername/yourrepo.git`
-3. Commit normally. The correct SSH key handles authentication and the correct `.gitconfig` handles the author metadata automatically!
+1. **Working on Personal Code:**
+   - Place your project strictly in `Desktop/Personal/`.
+   - Add/Clone remote using the personal SSH alias: `git remote add origin git@github.com:username/personal-repo.git`
+   - **Outcome:** Git seamlessly deploys your personal SSH key for authentication and logs commits under your personal Name/Email.
+
+2. **Working on Work Code:**
+   - Place your project strictly in `Desktop/Work/`.
+   - Add/Clone remote using the work SSH alias: `git remote add origin git@github-work:company/work-repo.git`
+   - **Outcome:** Git seamlessly deploys your work SSH key for authentication and logs commits under your official work Name/Email.
